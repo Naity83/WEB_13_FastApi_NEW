@@ -1,7 +1,11 @@
 from fastapi import FastAPI, Request, Depends, HTTPException, status
-from src.routes import contacts, auth
+from src.routes import contacts, auth, users
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.middleware.cors import CORSMiddleware
+import redis.asyncio as redis
+
+from src.conf.config import config
+from fastapi_limiter import FastAPILimiter
 
 
 from sqlalchemy import text
@@ -23,7 +27,20 @@ app.add_middleware(
 
 
 app.include_router(auth.router, prefix="/api")
+app.include_router(users.router, prefix="/api")
 app.include_router(contacts.router, prefix="/api")
+
+
+
+@app.on_event("startup")
+async def startup():
+    r = await redis.Redis(
+        host=config.REDIS_DOMAIN,
+        port=config.REDIS_PORT,
+        db=0,
+        password=config.REDIS_PASSWORD,
+    )
+    await FastAPILimiter.init(r)
 
 
 

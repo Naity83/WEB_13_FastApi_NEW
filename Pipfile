@@ -17,6 +17,11 @@ bcrypt = "*"
 pydantic-settings = "*"
 python-multipart = "*"
 libgravatar = "*"
+fastapi-mail = "*"
+python-dotenv = "*"
+redis = "*"
+fastapi-limiter = "*"
+cloudinary = "*"
 
 [dev-packages]
 
