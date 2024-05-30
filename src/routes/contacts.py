@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, status, Query, Path
 from typing import List
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.database.db import get_db
-from src.schemas import ContactBase, ContactCreate, ContactInDB, ContactUpdate
+from src.schemas.contacts import ContactBase, ContactCreate, ContactInDB, ContactUpdate
 from src.repository import contacts as repository_contacts
 from sqlalchemy import or_, select
 from src.database.models import Contact

@@ -1,7 +1,7 @@
 import logging
 from fastapi import HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from src.schemas import ContactBase, ContactCreate, ContactInDB, ContactUpdate
+from src.schemas.contacts import  ContactCreate, ContactInDB, ContactUpdate, ContactBase
 from src.database.models import Contact
 from sqlalchemy import select, extract
 from datetime import date, timedelta

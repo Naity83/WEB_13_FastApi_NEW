@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request, Depends, HTTPException, status
-from src.routes import contacts
+from src.routes import contacts, auth
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -22,8 +22,9 @@ app.add_middleware(
 )
 
 
-
+app.include_router(auth.router, prefix="/api")
 app.include_router(contacts.router, prefix="/api")
+
 
 
 @app.get("/", tags=["Root"])
